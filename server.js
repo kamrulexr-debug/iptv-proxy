@@ -3,12 +3,15 @@ const { createProxyMiddleware } = require("http-proxy-middleware");
 
 const app = express();
 
+app.get("/health", (req, res) => {
+  res.status(200).send("OK");
+});
+
 app.use(
   "/",
   createProxyMiddleware({
     target: "http://198.195.239.50:8095",
-    changeOrigin: true,
-    secure: false
+    changeOrigin: true
   })
 );
 
